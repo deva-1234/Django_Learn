@@ -1,0 +1,41 @@
+{% extends "todo\\base.html" %}
+{% block content %}
+
+<div class="container">
+<div class="row mt-4">
+	<div class="col">
+	<h3>To-Do Items</h3>
+	</div>
+	
+	
+			  </div>
+			  <form action='home1/' class="form-inline mt-4" method='POST'>
+			  {% csrf_token %}
+			<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="add-text">
+			<button class="btn btn-primary   my-2 my-sm-0" type="submit">Add</button>
+			</form>
+  <div class="row mt-4">
+	    <div class="col">
+
+<ul class="list-group mt-4">
+{% for post in posts %}
+                <li class="list-group-item list-group-item-light">{{post.text}}
+				
+				<form action='del/{{post.id}}/'  method='POST'>
+				{% csrf_token %}
+				<input class="btn btn-danger float-right mt-0" type="submit" value="Delete">
+				</form>
+				
+				<form action='update/{{post.id}}/'  method='POST'>
+				{% csrf_token %}
+				<input class="btn btn-primary float-right mr-4" type="submit" value="Update">
+				</form>
+</li>
+				
+  {% endfor %}              
+              </ul>
+			  </div>
+			  </div>
+			  </div>
+{% endblock content %}
+
